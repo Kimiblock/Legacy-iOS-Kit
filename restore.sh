@@ -90,7 +90,7 @@ set_tool_paths() {
     : '
     sets variables: platform, platform_ver, dir
     also checks architecture (linux) and macos version
-    also set distro, debian_ver, ubuntu_ver, fedora_ver variables for linux
+    also set , debian_ver, ubuntu_ver, fedora_ver variables for linux
 
     list of tools set here:
     bspatch, jq, scp, ssh, sha1sum (for macos: shasum -a 1), zenity
@@ -148,20 +148,7 @@ set_tool_paths() {
             fedora_ver=$VERSION_ID
         fi
 
-        # distro check
-        if [[ $ID == "arch" || $ID_LIKE == "arch" || $ID == "artix" ]]; then
-            distro="arch"
-        elif (( ubuntu_ver >= 22 )) || (( debian_ver >= 12 )) || [[ $debian_ver == "sid" ]]; then
-            distro="debian"
-        elif (( fedora_ver >= 37 )); then
-            distro="fedora"
-        elif [[ $ID == "opensuse-tumbleweed" ]]; then
-            distro="opensuse"
-        elif [[ $ID == "gentoo" || $ID_LIKE == "gentoo" || $ID == "pentoo" ]]; then
-            distro="gentoo"
-        else
-            error "Your distro ($platform_ver) is not detected/supported. See the repo README for supported OS versions/distros"
-        fi
+        distro="arch"
         zenity="$(which zenity)"
 
         # live cd/usb check
